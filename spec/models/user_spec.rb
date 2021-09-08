@@ -1,5 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should have_many(:projects).dependent(:destroy) }
+  it { should have_many(:project_tasks).dependent(:destroy) }
+  it { should have_many(:dev_tasks).dependent(:destroy) }
+  it { should validate_presence_of(:name) }
+  it { should validate_presence_of(:type) }
 end
