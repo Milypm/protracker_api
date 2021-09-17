@@ -23,7 +23,10 @@ module ProtrackerApp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
-
+    require "./app/middleware/validate_request_params.rb"
+    # Insert our middleware into the stack before Rack::Head
+    config.middleware.insert_before Rack::Head, ValidateRequestParams
+    
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

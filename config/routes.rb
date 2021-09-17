@@ -4,9 +4,11 @@ Rails.application.routes.draw do
   delete :logout, to: "sessions#logout"
   get :logged_in, to: "sessions#logged_in"
 
-  resources :projects
-  resources :project_tasks
-  resources :dev_tasks
+  resources :projects do
+    resources :project_tasks do
+      resources :dev_tasks, except: [:show]
+    end
+  end
 
   root to: "static#home"
 end

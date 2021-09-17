@@ -1,5 +1,5 @@
 class ProjectTasksController < ApplicationController
-  before_action :set_project, only: [:index, :create]
+  before_action :set_project, only: [:index, :create, :show]
   before_action :set_project_task, only: [:show, :update, :destroy]
 
   # GET /todos/:todo_id/items
@@ -37,10 +37,10 @@ class ProjectTasksController < ApplicationController
   end
 
   def set_project_task
-    @project_task = @project.project_tasks.find_by!(id: params[:id]) if @project
+    @project_task = ProjectTask.find_by!(id: params[:id]) if @project
   end
 
   def project_task_params
-    params.permit(:task, :assigned_to)
+    params.permit(:task, :assigned_to, :user_id, :project_id)
   end
 end
